@@ -1,0 +1,82 @@
+<ion-view title="My Expenses">
+
+    <!-- <ion-nav-bar align-title="left" class="bar-dark">
+
+      <ion-nav-buttons side="right">
+          <div class="profile-bar">
+              <img src="img/{{userProfile.username}}.png" alt="" style="height: 35px;border-radius: 20px">
+
+              <div class="profile-username"> {{userProfile.name}} </div>
+
+              <button class="button button-icon button-clear ion-log-out css-logout" ng-click="logout()">
+              </button>
+          </div>
+      </ion-nav-buttons>
+  </ion-nav-bar> -->
+    <ion-content class="padding">
+
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list>
+            <div ng-repeat="expense in myExpenses">
+                <ion-item ng-click="toggleExpense(expense)" ng-class="{active: isExpenseShown(expense)}">
+                  <div class="row">
+                    <div class="col text-center"><h2>{{expense.Description}}</h2></div>
+                  </div>
+                  <div class="row responsive-sm">
+                      <!-- <i class="icon ion-ios-pricetags-outline "></i> -->
+                        <div class="col text-center"><img src="img/{{mapUserNameToPortrait(expense.Approver)}}" alt="" style="height: 50px;border-radius: 50%"></div>
+                      <!-- <div class="col col-60 item-icon-left" >
+                          <h2>{{expense.ExpenseReportID}}</h2>
+                      </div> -->
+                      <div class="col text-center">{{expense.Approver}}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col col-offset-10"><i class="icon ion-ios-calendar dark-gray"></i> {{expense.SubmissionDate}}</div>
+                      <div class="col"><i class="icon ion-social-usd dark-gray"></i> {{expense.Amount}}</div>
+                  </div>
+                  <div class="row">
+                      <!--<div class="col col-30">Approver :</div>-->
+                      <div class="col col-offset-10" >
+                        <i class="icon ion-pound dark-gray"></i> {{expense.ExpenseReportID}}
+                      </div>
+                      <!-- <div class="col col-60">{{expense.Requester}}</div> -->
+                      <div class="col"><i class="icon ion-ios-information dark-gray"> </i>{{expense.Status}}</div>
+
+                  </div>
+                </ion-item>
+                <ion-item class="item-accordion" ng-show="isExpenseShown(expense)" ng-class="{active: isExpenseShown(expense)}">
+
+                  <div ng-repeat="item in expense.lineItems">
+                    <div class="row small-font">
+                      <i class="icon ion-ios-pricetag-outline "></i>
+                        <div class="col col-30">{{item.ExpenseDate}}:</div>
+                        <div class="col col-50"> {{item.ExpenseType}}</div>
+                        <div class="col col-20">{{item.Amount}}</div>
+                    </div>
+                      <div class="row small-font">
+                        <div class="col col-5"></div>
+                        <div class="col col-90 italic text-center">{{item.Description}}</div>
+                        <!-- <div class="col col-90"> : </div> -->
+                      </div>
+                      <!--<div class="row small-font">
+
+                      </div>-->
+                  </div>
+
+                  <div class="row">
+                      <div class="col col-50">
+                          <button class="button icon-left button-positive ion-ios-checkmark-empty" ng-click="approveExpense(expense)">Approve</button>
+                      </div>
+                      <div class="col col-50">
+                          <button class="button icon-left button-assertive ion-ios-close-empty" ng-click="declineExpense(expense)">Decline</button>
+                      </div>
+                  </div>
+
+                </ion-item>
+            </div>
+        </ion-list>
+        <i ng-hide="hasData()" class="ion-ios-filing-outline empty-list-background-icon"></i>
+        <!-- <p class="empty-list-background-small">Expenses</p> -->
+    </ion-content>
+</ion-view>

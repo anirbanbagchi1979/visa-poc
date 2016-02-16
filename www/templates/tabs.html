@@ -1,0 +1,23 @@
+<ion-nav-bar align-title="left" class="bar-dark" ng-controller="StatusBarCtrl">
+
+  <ion-nav-buttons side="right">
+      <div class="profile-bar">
+          <!--<img src="img/{{userProfile.username}}.png" alt="" style="height: 35px;border-radius: 20px">-->
+
+          <div class="profile-username"> {{userProfile.name}} </div>
+
+          <button class="button button-icon button-clear ion-log-out css-logout" ng-click="logout()">
+          </button>
+      </div>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-tabs class="tabs-icon-top tabs-assertive">
+
+    <ion-tab title="Approvals" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline" href="#/tab/awaiting/0">
+        <ion-nav-view name="tab-awaiting"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Expenses" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline" href="#/tab/my">
+        <ion-nav-view name="tab-my"></ion-nav-view>
+    </ion-tab>
+
+</ion-tabs>
